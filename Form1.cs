@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -108,6 +109,8 @@ namespace MathQuiz
                 MessageBox.Show("You got all the answers right!",
                                 "Congratulations!");
                 startButton.Enabled = true;
+
+                timeLabel.BackColor = SystemColors.Control;
             }
             else if (timeLeft > 0)
             {
@@ -160,6 +163,42 @@ namespace MathQuiz
             {
                 int lengthOfAnswer = answerBox.Value.ToString().Length;
                 answerBox.Select(0, lengthOfAnswer);
+            }
+        }
+
+        private void plusSound(object sender, EventArgs e)
+        {
+            if (addend1 + addend2 == sum.Value)
+            {
+                SoundPlayer simpleSound = new SoundPlayer(@"c:\Windows\Media\tada.wav");
+                simpleSound.Play();
+            }
+        }
+
+        private void minusSound(object sender, EventArgs e)
+        {
+            if (minuend - subtrahend == difference.Value)
+            {
+                SoundPlayer simpleSound = new SoundPlayer(@"c:\Windows\Media\tada.wav");
+                simpleSound.Play();
+            }
+        }
+
+        private void timesSound(object sender, EventArgs e)
+        {
+            if (multiplicand * multiplier == product.Value)
+            {
+                SoundPlayer simpleSound = new SoundPlayer(@"c:\Windows\Media\tada.wav");
+                simpleSound.Play();
+            }
+        }
+
+        private void divideSound(object sender, EventArgs e)
+        {
+            if (dividend / divisor == quotient.Value)
+            {
+                SoundPlayer simpleSound = new SoundPlayer(@"c:\Windows\Media\tada.wav");
+                simpleSound.Play();
             }
         }
     }

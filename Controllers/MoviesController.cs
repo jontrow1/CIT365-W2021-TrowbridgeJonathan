@@ -95,11 +95,11 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,genreTest,Price,Rating")] Movie movie)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(movie);
+                _context.Add(new Movie(movie.Title, movie.ReleaseDate, movie.Price, movie.genreTest, movie.Rating, movie.ImagePath));
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -127,7 +127,7 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,genreTest,Price,Rating")] Movie movie)
         {
             if (id != movie.Id)
             {
@@ -138,7 +138,7 @@ namespace MvcMovie.Controllers
             {
                 try
                 {
-                    _context.Update(movie);
+                    _context.Update(new Movie(movie.Id, movie.Title, movie.ReleaseDate, movie.Price, movie.genreTest, movie.Rating, movie.ImagePath));
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
